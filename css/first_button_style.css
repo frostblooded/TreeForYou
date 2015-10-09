@@ -1,5 +1,6 @@
-body,div,input
+body,div,input,html
 {
+	height: 100%;
 	margin:0px;
 	padding:0px;
 }
@@ -9,13 +10,14 @@ body,div,input
 }
 
 body {
-	background-image: url("background.jpg");
-	background-repeat: no-repeat;
-	background-position: center center;
+	background-image: url("background.png");
+	/*background-repeat: no-repeat;*/
+	/*background-position: center center;*/ /*not needed cause of 'cover' */
 	background-attachment: fixed;
 	background-size: cover;
 }
 
+	
 #nav {
 	display: inline;
 	width: 33%;
@@ -24,14 +26,20 @@ body {
     margin-left: 5%;
 }
 
-#container {
+/* DIMMING THE BACKGROUND*/
+
+#bodyDim {
 	width: 100%;
 	height: 100%;
-	background-color:rgba(0,0,0,0.7);
-	margin-top: 0%;
+	background-color:rgba(0,0,0,0.5);
+	margin-top: 0%;	
 }
 
-div {
-	margin-top: 20%;
-	margin-right: 30%;
+
+/*STYLING OF THE MAP DIV*/
+
+#map {
+	height: 50%;
+	width: 50%;
+    margin: auto auto;
 }
