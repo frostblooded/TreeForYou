@@ -10,16 +10,15 @@
 <body>
 	<div class="container">
         <form>
-            Username:
-            <input class="form-control" type="text" id="username">
-            Password:
-            <input class="form-control" type="password" id="password">
-            Reenter password:
-            <input class="form-control" type="password" id="reentered_password">
-            Email:
-            <input class="form-control" type="email" id="email">
-            <input class="form-control" type="button" id="submit_button" value="Register">
             
+            <input type="text" id="username" placeholder="Username">
+            
+            <input type="password" id="password" placeholder="Password">
+            
+            <input type="password" id="reentered_password" placeholder="Reenter password">
+
+            <input type="email" id="email" placeholder="E-mail"> 
+            <input type="button" id="submit_button" value="Register">
             <script>
                 $("#submit_button").click(function(){
                     var username = $("#username").val();
