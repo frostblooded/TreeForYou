@@ -5,6 +5,7 @@ var initialLocation;
 var browserSupportFlag =  new Boolean();
 var tuesLocation;
 var contentString;
+var removeMarker = false;
 
 $(document).ready(function(){
 	Parse.initialize("ypv4dSS2h2pN6UTduc8hC9czpjBRJIklN7gN4ULv", "EgGSdtxDzc7GtuIvnGaaF3NBbRmuRRPq6B6yKbRV");
@@ -38,28 +39,30 @@ function initMap() {
 
 function placeMarker(pos, map){	
 	
-	if(currentMarker != null)
-	{
+	if(currentMarker)
+	{		
 		currentMarker.setMap(null);
 	}
+	else
+	{
+		removeMarker = true;
+	}
 
-	markers[markers.length] = new google.maps.Marker({
+	currentMarker = new google.maps.Marker({
 		position: pos,
 		map: map,
 		icon: "../images/freespot.png"
 	});
-
-	currentMarker = markers[markers.length-1];
 	
-	markers[markers.length - 1].info = new google.maps.InfoWindow({
+	currentMarker.info = new google.maps.InfoWindow({
 		content: contentString
 	});
 	
-	markers[markers.length - 1].addListener("click", function(){		
-
-		this.info.open(map, this);	
-		currentMarker = this;
+	currentMarker.addListener("click", function(){
+		this.info.open(map, this);
 	});
+
+	currentMarker.info.open(map, currentMarker);
 }
 
 function loadMarkers(){
@@ -69,20 +72,24 @@ function loadMarkers(){
 		success: function(results){
 			for(var i = 0; i < results.length; i++){
 				var marker_pos = results[i].get("coordinates");
-				var marker = new google.maps.Marker({
+				markers[markers.length] = new google.maps.Marker({
 					position: new google.maps.LatLng(marker_pos.latitude, marker_pos.longitude),
 					icon: "../images/freespot.png"
 				});
 				
-				marker.info = new google.maps.InfoWindow({
+				markers[markers.length-1].info = new google.maps.InfoWindow({
 					content: results[i].get("info")
 				});
 				
-				marker.addListener("click", function(){
+				markers[markers.length-1].addListener("click", function(){
+					for (i = 0; i < markers.length; i++) {
+						markers[i].info.close();
+					}
+
 					this.info.open(map, this);
 				});
 				
-				marker.setMap(map);
+				markers[markers.length-1].setMap(map);
 			}
 		},
 		error: function(error){
@@ -92,28 +99,28 @@ function loadMarkers(){
 }
 
 
-$("#save_current").click(function(){
+function saveMarker(){
 	localStorage.clear();
-	$("#save_current").text("Saving...");
-	for(var i = 0; i < markers.length; i++){
-		var ParseSpace = Parse.Object.extend("Spaces");
-		var new_parse_space = new ParseSpace();
-		var space_pos = new Parse.GeoPoint(markers[i].position.lat(), markers[i].position.lng());
-		new_parse_space.set("coordinates", space_pos);
-		new_parse_space.set("info", markers[i].info.content);
-		new_parse_space.save(null, {
-			success: function(object) {
+	var ParseSpace = Parse.Object.extend("Spaces");
+	var new_parse_space = new ParseSpace();
+	var space_pos = new Parse.GeoPoint(currentMarker.position.lat(), currentMarker.position.lng());
+	new_parse_space.set("coordinates", space_pos);
+	new_parse_space.set("info", currentMarker.info.content);
+	new_parse_space.save(null, {
+		success: function(object) {			
+			$("#save_current").text("Saved current marker");			
+			currentMarker.info.close();			
+			markers[markers.length] = currentMarker;
+			currentMarker = 0;			
+			removeMarker = false;
+		},
+		error: function(model, error) {
+		// Show the error message somewhere and let the user try again.
 				$("#save_current").text("Save current spaces");
-					// Hooray! Let them use the app now.
-			},
-			error: function(model, error) {
-			// Show the error message somewhere and let the user try again.
-					$("#save_current").text("Save current spaces");
-					alert("Error: " + error.code + " " + error.message);
-			}
-		});
-	}
-});
+				alert("Error: " + error.code + " " + error.message);
+		}
+	});	
+};
 
 function handleNoGeolocation(errorFlag) {
 	if (errorFlag == true) {
@@ -147,7 +154,7 @@ contentString ='<div class = "contentsDiv">' +
 						'<div class="image-upload"><label for="file-input"><img class="image-label" src="../images/add_picture.png"/></label><input id="file-input" onchange="readURL(this)" type="file"/></div>'+
 					'</div>'+
 					'<div class = "AcceptButton">'+
-						'<button>Accept</button>'+
+						'<button onclick="saveMarker()">Accept</button>'+
 					'</div>'+
 				'</div>';
 
