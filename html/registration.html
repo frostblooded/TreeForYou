@@ -2,15 +2,16 @@
 <html>
 <head>
 	<title>Registration</title>
+    <meta charset="utf-8">  
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../css/registration_style.css">
     <script src="../javascript/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="../javascript/parse-1.6.5.js"></script>
 </head>
-<body onload="focusUserField()">
+<body>
 	<div class="container">
         <form id = "register-form">
-            <h3>
+            <h3 style = "text-align:center">
                 Register
             </h3>
             <div class="form-group">
@@ -49,6 +50,7 @@
                         newUser.signUp(null, {
                             success: function(user) {
                                 alert("Success!");
+
                                 // Hooray! Let them use the app now.
                             },
                             error: function(user, error) {
@@ -62,9 +64,9 @@
 
             
             <script>
-            function focusUserField() {
-                document.getElementById("username").focus();
-            }
+                $(document).ready(fucntion(){
+                    $("#username").focus();
+                });
             </script>
         </form>
     </div>
