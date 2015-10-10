@@ -22,13 +22,17 @@ input{
 .form-control{
 
 	border-radius: 0,5%;
-	/*opacity: 0.8;*/
+	opacity: 0.5;
+}
+
+.form-control:focus{
+	opacity: 1;
 }
 
 #register-form{
 	background-color: rgba(200, 200, 200, 0.6);
 	width: 30%;
-	margin: 8% 0%;
+	margin: 20% auto;
 	padding: 15px;
 	border-radius: 3%;
 	border: 1px solid #EEEEEE;	
