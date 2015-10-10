@@ -5,3 +5,5 @@ Registration:
 
 Map:
 -Fix bottom button styling
+
+-Clean up project's folders
