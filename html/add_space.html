@@ -54,11 +54,23 @@
 			}
 
 			function placeMarker(pos, map){
+				var contentString = '<p>"Yaseeeeeeeeeeeeen"</p>';
+
+			  	var infowindow = new google.maps.InfoWindow({
+			    	content: contentString
+			  	});
+
+
 				markers[markers.length] = new google.maps.Marker({
 					position: pos,
 					map: map,
 					icon: "../images/freespot.png"
 				});
+
+				markers[markers.length-1].addListener('click', function() {
+				    infowindow.open(map, marker);
+				  });
+
 			}
 
 			$("#save_current").click(function(){
