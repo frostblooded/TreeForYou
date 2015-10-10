@@ -15,50 +15,93 @@
 			Save current spaces
 		</div>
     <script type="text/javascript">
-				var markers = new Array();
-        var map;
-			
+			var markers = new Array();
+			var map;
+
+			$(document).ready(function(){
 				Parse.initialize("ypv4dSS2h2pN6UTduc8hC9czpjBRJIklN7gN4ULv", "EgGSdtxDzc7GtuIvnGaaF3NBbRmuRRPq6B6yKbRV");
-				
-				
-        function initMap() {
-          map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 42.667877, lng: 25.163029},
-            zoom: 7
-          });
-					google.maps.event.addListener(map, "click", function(e) {
-						placeMarker(e.latLng, map);
-					});
-        }
-				
-				function placeMarker(pos, map){
-					markers[markers.length] = new google.maps.Marker({
-						position: pos,
-						map: map,
-						icon: "../images/freespot.png"
-					});
-					map.panTo(pos);
-				}
+				loadMarkers();
+			});
 			
-				$("#save_current").click(function(){
-					localStorage.clear();
-					for(var i = 0; i < markers.length; i++){
-						var ParseSpace = Parse.Object.extend("Spaces");
-						var new_parse_space = new ParseSpace();
-						var space_pos = new Parse.GeoPoint(markers[i].position.lat(), markers[i].position.lng());
-						new_parse_space.set("coordinates", space_pos);
-						new_parse_space.save(null, {
-							success: function(object) {
-									alert("Success!");
-									// Hooray! Let them use the app now.
-							},
-							error: function(model, error) {
-							// Show the error message somewhere and let the user try again.
-									alert("Error: " + error.code + " " + error.message);
-							}
-						});
+			function placeMarker(pos, map){
+				var contentString = "";
+				
+				markers[markers.length] = new google.maps.Marker({
+					position: pos,
+					map: map,
+					icon: "../images/freespot.png"
+				});
+				
+				markers[markers.length - 1].info = new google.maps.InfoWindow({
+					content: contentString
+				});
+				
+				markers[markers.length - 1].addListener("click", function(){
+					markers[markers.length - 1].info.open(map, markers[markers.length - 1]);
+				});
+			}
+
+			function initMap() {
+				map = new google.maps.Map(document.getElementById('map'), {
+					center: {lat: 42.667877, lng: 25.163029},
+					zoom: 7
+				});
+				google.maps.event.addListener(map, "click", function(e) {
+					placeMarker(e.latLng, map);
+				});
+			}
+			
+			function loadMarkers(){
+				var ParseSpace = Parse.Object.extend("Spaces");
+				var query = new Parse.Query(ParseSpace);
+				query.find({
+					success: function(results){
+						for(var i = 0; i < results.length; i++){
+							var marker_pos = results[i].get("coordinates");
+							var marker = new google.maps.Marker({
+								position: new google.maps.LatLng(marker_pos.latitude, marker_pos.longitude),
+								icon: "../images/freespot.png"
+							});
+							
+							marker.info = new google.maps.InfoWindow({
+								content: results[i].get("info")
+							});
+							
+							console.log(marker.info.content);
+							
+							marker.addListener("click", function(){
+								this.info.open(map, this);
+							});
+							
+							marker.setMap(map);
+						}
+					},
+					error: function(error){
+						alert("error " + error.code);
 					}
 				});
+			}
+
+
+			$("#save_current").click(function(){
+				localStorage.clear();
+				for(var i = 0; i < markers.length; i++){
+					var ParseSpace = Parse.Object.extend("Spaces");
+					var new_parse_space = new ParseSpace();
+					var space_pos = new Parse.GeoPoint(markers[i].position.lat(), markers[i].position.lng());
+					new_parse_space.set("coordinates", space_pos);
+					new_parse_space.set("info", markers[i].info.content);
+					new_parse_space.save(null, {
+						success: function(object) {
+								// Hooray! Let them use the app now.
+						},
+						error: function(model, error) {
+						// Show the error message somewhere and let the user try again.
+								alert("Error: " + error.code + " " + error.message);
+						}
+					});
+				}
+			});
     </script>
     <script async defer
     	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa1QHYIwXmhpwLSnxgJFwd-kA2AktR6Z0&callback=initMap">
