@@ -37,7 +37,7 @@
 				});
 				
 				markers[markers.length - 1].addListener("click", function(){
-					markers[markers.length - 1].info.open(map, markers[markers.length - 1]);
+					this.info.open(map, this);
 				});
 			}
 
@@ -67,8 +67,6 @@
 								content: results[i].get("info")
 							});
 							
-							console.log(marker.info.content);
-							
 							marker.addListener("click", function(){
 								this.info.open(map, this);
 							});
@@ -85,6 +83,7 @@
 
 			$("#save_current").click(function(){
 				localStorage.clear();
+				$("#save_current").text("Saving...");
 				for(var i = 0; i < markers.length; i++){
 					var ParseSpace = Parse.Object.extend("Spaces");
 					var new_parse_space = new ParseSpace();
@@ -93,10 +92,12 @@
 					new_parse_space.set("info", markers[i].info.content);
 					new_parse_space.save(null, {
 						success: function(object) {
+							$("#save_current").text("Save current spaces");
 								// Hooray! Let them use the app now.
 						},
 						error: function(model, error) {
 						// Show the error message somewhere and let the user try again.
+								$("#save_current").text("Save current spaces");
 								alert("Error: " + error.code + " " + error.message);
 						}
 					});
