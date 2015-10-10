@@ -1,3 +1,4 @@
-input[type="text"]{
-    display: block   
+input{
+    display: block;
+    margin-bottom: 10px;
 }

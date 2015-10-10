@@ -4,17 +4,36 @@
 	<title>Registration</title>
     <link rel="stylesheet" type="text/css" href="../css/registration_style.css">
     <script src="../javascript/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="../javascript/parse-1.6.5.js"></script>
 </head>
 <body>
 	<div class="container">
         <form>
+            Username:
             <input type="text" id="username">
+            Password:
             <input type="password" id="password">
-            <input type="button" id="submit_button">
+            <input type="button" id="submit_button" value="Register">
             
             <script>
                 $("#submit_button").click(function(){
-                    alert("hey");
+                    var username = $("#username").val();
+                    var password = $("#password").val();
+                    
+                    Parse.initialize("ypv4dSS2h2pN6UTduc8hC9czpjBRJIklN7gN4ULv", "EgGSdtxDzc7GtuIvnGaaF3NBbRmuRRPq6B6yKbRV");
+                    var newUser = new Parse.User();
+                    newUser.set("username", username);
+                    newUser.set("password", password);
+                    newUser.signUp(null, {
+                        success: function(user) {
+                            alert("Success!");
+                            // Hooray! Let them use the app now.
+                        },
+                        error: function(user, error) {
+                        // Show the error message somewhere and let the user try again.
+                            alert("Error: " + error.code + " " + error.message);
+                        }
+                    });
                 });
             </script>
         </form>
