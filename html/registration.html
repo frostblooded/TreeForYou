@@ -11,14 +11,21 @@
 	<div class="container">
         <form>
             
-            <input type="text" id="username" placeholder="Username">
-            
-            <input type="password" id="password" placeholder="Password">
-            
-            <input type="password" id="reentered_password" placeholder="Reenter password">
-
-            <input type="email" id="email" placeholder="E-mail"> 
-            <input type="button" id="submit_button" value="Register">
+            <div class="form-group">
+                <input class="form-control" type="text" id="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" id="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" id="reentered_password" placeholder="Reenter password">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="email" id="email" placeholder="E-mail"> 
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="button" id="submit_button" value="Register">
+            </div>
             <script>
                 $("#submit_button").click(function(){
                     var username = $("#username").val();
