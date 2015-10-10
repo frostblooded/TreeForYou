@@ -3,18 +3,37 @@
 <head>
 	<title>FIRST_PAGE</title>
 	<link rel = "stylesheet" type="text/css" href = "css/first_button_style.css">
-		
+	<script type="text/javascript">
+ 		function getFile(){
+   			document.getElementById("upfile").click();
+ 		}
+ 		function sub(obj){
+    		var file = obj.value;
+    		var fileName = file.split("\\");
+    		document.getElementById("yourBtn").innerHTML = fileName[fileName.length-1];
+    		document.myForm.submit();
+    		event.preventDefault();
+  		}
+	</script>	
 </head>
 <body>
 	<div id = "bodyDim">
+		<div id="navbar">
+			<header>
+				<h1 id="title">dasdasds</h1>
+			</header>
+		</div>
+		<div id="reg">
+			<h4>REGISTER</h4>
+		</div>
 		<div id="nav">
 			<div>
-				<input type="submit" value = "VIEW MAP" class = "FirstRow">
-				<input type="submit" value = "PLANT TREE" class = "SecondRow">
+				<input type="submit" value = "VIEW MAP" class = "FirstRow"/>
+				<input type="submit" value = "PLANT TREE" class = "FirstRow SecondColumn"/>
 			</div>
-			<div>	
-				<input type="submit" value = "SEARCH" class = "FirstRow">
-				<input type="submit" value = "REGISTRATION" class = "SecondRow">	 
+			<div class="file_upload" onclick="getFile()">	
+				<input type="file" id="upfile" onchange="sub(this)"/>	
+				<span id="upload-button">UPLOAD</span>
 			</div>
 		</div>
 	</div>
