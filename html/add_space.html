@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 90%; width: 100%}
+			#save_current {width: 100%; height: 100%; background-color: burlywood; cursor: pointer}
+    </style>
+    <script src="../javascript/jquery-1.11.3.js"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+		<div id="save_current">
+			Save current spaces
+		</div>
+    <script type="text/javascript">
+        var map;
+				
+        function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 42.667877, lng: 25.163029},
+            zoom: 7
+          });
+					google.maps.event.addListener(map, "click", function(e) {
+						placeMarker(e.latLng, map);
+					});
+        }
+				
+				function placeMarker(pos, map){
+					var marker = new google.maps.Marker({
+						position: pos,
+						map: map,
+						icon: "../images/freespot.png"
+					});
+					map.panTo(pos);
+				}
+			
+				$("#save_current").click(function(){
+					alert("lol");
+				});
+    </script>
+    <script async defer
+    	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa1QHYIwXmhpwLSnxgJFwd-kA2AktR6Z0&callback=initMap">
+    </script>
+  </body>
+</html>

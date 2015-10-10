@@ -15,13 +15,17 @@ input[type=submit] {
 	width: 10%;
 	border-radius: 100%;
 	opacity: 0.5;
-	background-color: lightgreen;
+	background-color: 99FF00;
 }
 
 #upload-button{
 	position: absolute;
 	left: 46%;
 	top: 50%;
+	font-family: "Ariel";
+	font-style: oblique;
+	font-size: 20px;
+
 
 }
 
@@ -36,8 +40,8 @@ input[type=file] {
 	left: 92%;
 	height: 12%;
 	text-align: center;
-	border-bottom-left-radius: 62%;
-	background-color: lightgreen;
+	border-bottom-left-radius: 35%;
+	background-color: 99FF00;
 	opacity: 0.5;
 }
 
@@ -50,20 +54,27 @@ input[type=file] {
 #title {
 	padding: 0px;
 	margin: 0px;
+	font-family: "Times New Roman", Times, serif;
+	font-style: italic;
+	font-size: 50px;
+	text-shadow: 1px 1px white, -1px -1px #444
 }
 
 #navbar {
 	float: left;
 	text-align: center;
 	border-bottom: 1px solid black;
-	background-color: lightgreen;
+	background-color: 99FF00;
 	opacity: 0.5;
 	width: 92%;
 }
 
 .FirstRow {
-	margin-top: 6%;
-	margin-left: 3%;
+	margin-top: 4%;
+	margin-left: 1%;
+	font-family: "Ariel";
+	font-style: oblique;
+	font-size: 20px;
 }
 
 .SecondColumn {
