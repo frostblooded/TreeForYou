@@ -22,6 +22,24 @@
 				Parse.initialize("ypv4dSS2h2pN6UTduc8hC9czpjBRJIklN7gN4ULv", "EgGSdtxDzc7GtuIvnGaaF3NBbRmuRRPq6B6yKbRV");
 				loadMarkers();
 			});
+			
+			function placeMarker(pos, map){
+				var contentString = "";
+				
+				markers[markers.length] = new google.maps.Marker({
+					position: pos,
+					map: map,
+					icon: "../images/freespot.png"
+				});
+				
+				markers[markers.length - 1].info = new google.maps.InfoWindow({
+					content: contentString
+				});
+				
+				markers[markers.length - 1].addListener("click", function(){
+					markers[markers.length - 1].info.open(map, markers[markers.length - 1]);
+				});
+			}
 
 			function initMap() {
 				map = new google.maps.Map(document.getElementById('map'), {
@@ -40,11 +58,22 @@
 					success: function(results){
 						for(var i = 0; i < results.length; i++){
 							var marker_pos = results[i].get("coordinates");
-							var new_marker = new google.maps.Marker({
+							var marker = new google.maps.Marker({
 								position: new google.maps.LatLng(marker_pos.latitude, marker_pos.longitude),
 								icon: "../images/freespot.png"
 							});
-							new_marker.setMap(map);
+							
+							marker.info = new google.maps.InfoWindow({
+								content: results[i].get("info")
+							});
+							
+							console.log(marker.info.content);
+							
+							marker.addListener("click", function(){
+								this.info.open(map, this);
+							});
+							
+							marker.setMap(map);
 						}
 					},
 					error: function(error){
@@ -53,25 +82,6 @@
 				});
 			}
 
-			function placeMarker(pos, map){
-				var contentString = '<p>"Yaseeeeeeeeeeeeen"</p>';
-
-			  	var infowindow = new google.maps.InfoWindow({
-			    	content: contentString
-			  	});
-
-
-				markers[markers.length] = new google.maps.Marker({
-					position: pos,
-					map: map,
-					icon: "../images/freespot.png"
-				});
-
-				markers[markers.length-1].addListener('click', function() {
-				    infowindow.open(map, marker);
-				  });
-
-			}
 
 			$("#save_current").click(function(){
 				localStorage.clear();
@@ -80,9 +90,9 @@
 					var new_parse_space = new ParseSpace();
 					var space_pos = new Parse.GeoPoint(markers[i].position.lat(), markers[i].position.lng());
 					new_parse_space.set("coordinates", space_pos);
+					new_parse_space.set("info", markers[i].info.content);
 					new_parse_space.save(null, {
 						success: function(object) {
-								alert("Success!");
 								// Hooray! Let them use the app now.
 						},
 						error: function(model, error) {
