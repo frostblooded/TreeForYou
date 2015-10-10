@@ -1,4 +1,35 @@
+form{
+	width: 30%;
+	margin: 10% 60%;
+}
+
 input{
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    width: 65%;
+    font-family: "Times new roman";
+	/*font-style: oblique; */
+	font-size: 20px;
+
 }
+
+#submit_button {
+
+	background-color: #CAFFD8;
+	border-bottom: 1px solid #72FE95;
+	border-radius: 10%; 
+	width: 25%;
+	margin-left: 20%;
+}
+
+#username, #password, #reenterd_password, #email{
+
+	border-radius: 0,5%;
+}
+
+body {
+	background-image: url("background_reg.jpg");
+	background-attachment: fixed;
+	background-size: cover;
+}
+
