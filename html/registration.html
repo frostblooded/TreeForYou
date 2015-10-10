@@ -13,15 +13,26 @@
             <input type="text" id="username">
             Password:
             <input type="password" id="password">
+            Reenter password:
+            <input type="password" id="reentered_password">
+            Email:
+            <input type="email" id="email">
             <input type="button" id="submit_button" value="Register">
             
             <script>
                 $("#submit_button").click(function(){
                     var username = $("#username").val();
                     var password = $("#password").val();
+                    var reentered_password = $("#reentered_password").val();
+                    var email = $("#email").val();
+                    
+                    if(password !== reentered_password){
+                        alert("Mismatched passwords!");   
+                    }
                     
                     Parse.initialize("ypv4dSS2h2pN6UTduc8hC9czpjBRJIklN7gN4ULv", "EgGSdtxDzc7GtuIvnGaaF3NBbRmuRRPq6B6yKbRV");
                     var newUser = new Parse.User();
+                    Parse.User.logOut();
                     newUser.set("username", username);
                     newUser.set("password", password);
                     newUser.signUp(null, {
