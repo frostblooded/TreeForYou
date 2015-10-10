@@ -1,7 +1,3 @@
-form{
-	width: 30%;
-	margin: 8% 0%;
-}
 
 input{
     display: block;
@@ -17,16 +13,25 @@ input{
 
 	background-color: #CAFFD8;
 	border-bottom: 1px solid #72FE95;
-	border-radius: 10%; 
+	border-radius: 10%;
 	width: 25%;
 	margin-left: 35%;
 	opacity: 0.8;
 }
 
-#username, #password, #reentered_password, #email{
+.form-control{
 
 	border-radius: 0,5%;
-	opacity: 0.6;
+	/*opacity: 0.8;*/
+}
+
+#register-form{
+	background-color: rgba(200, 200, 200, 0.6);
+	width: 30%;
+	margin: 8% 0%;
+	padding: 15px;
+	border-radius: 3%;
+	border: 1px solid #EEEEEE;	
 }
 
 body {
