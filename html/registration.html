@@ -29,22 +29,26 @@
                     if(password !== reentered_password){
                         alert("Mismatched passwords!");   
                     }
-                    
-                    Parse.initialize("ypv4dSS2h2pN6UTduc8hC9czpjBRJIklN7gN4ULv", "EgGSdtxDzc7GtuIvnGaaF3NBbRmuRRPq6B6yKbRV");
-                    var newUser = new Parse.User();
-                    Parse.User.logOut();
-                    newUser.set("username", username);
-                    newUser.set("password", password);
-                    newUser.signUp(null, {
-                        success: function(user) {
-                            alert("Success!");
-                            // Hooray! Let them use the app now.
-                        },
-                        error: function(user, error) {
-                        // Show the error message somewhere and let the user try again.
-                            alert("Error: " + error.code + " " + error.message);
-                        }
-                    });
+                    else if(email == ""){
+                        alert("Please enter an email!");   
+                    }
+                    else{    
+                        Parse.initialize("ypv4dSS2h2pN6UTduc8hC9czpjBRJIklN7gN4ULv", "EgGSdtxDzc7GtuIvnGaaF3NBbRmuRRPq6B6yKbRV");
+                        var newUser = new Parse.User();
+                        Parse.User.logOut();
+                        newUser.set("username", username);
+                        newUser.set("password", password);
+                        newUser.signUp(null, {
+                            success: function(user) {
+                                alert("Success!");
+                                // Hooray! Let them use the app now.
+                            },
+                            error: function(user, error) {
+                            // Show the error message somewhere and let the user try again.
+                                alert("Error: " + error.code + " " + error.message);
+                            }
+                        });
+                    }
                 });
             </script>
         </form>
