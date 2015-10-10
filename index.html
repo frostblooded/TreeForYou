@@ -43,14 +43,14 @@
 		</a>
 		<div id="nav">
 			<div>
-				<input type="submit" value = "VIEW MAP" class = "FirstRow"/>
+				<input type="submit" value = "VIEW MAP" class = "FirstRow" onclick="mapOpen()" />
 				<input type="submit" value = "PLANT TREE" class = "FirstRow SecondColumn"/>
 			</div>
 			<div class="file_upload" onclick="getFile()">	
 				<input type="file" id="upfile" name="files[]" multiple onchange="sub(this)"/>	
 				<input type="submit" value="UPLOAD" id="upload-button"/>
 				
-				<script>
+				<script class="upload_script">
   					function handleFileSelect(evt) {
     					var files = evt.target.files; // FileList object
 
@@ -82,10 +82,17 @@
 
   					document.getElementById('upfile').addEventListener('change', handleFileSelect, false);
 				</script>
+
 				<output id="list"></output>
 			</div>
 		</div>
 	</div>
+	<script>
+		function mapOpen()
+		{
+			window.open("html/api_test.html");
+		}
+	</script>
 </body>
 </html>
 

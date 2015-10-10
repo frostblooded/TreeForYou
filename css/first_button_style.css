@@ -1,5 +1,6 @@
 body,div,input,html,header,span
 {
+	/*height: 100%;*/
 	margin:0px;
 	padding:0px;
 }
@@ -9,6 +10,7 @@ body {
 	background-attachment: fixed;
 	background-size: cover;
 }
+
 
 input[type=submit] {
 	height: 17%;
@@ -41,7 +43,7 @@ input[type=file] {
 	height: 12%;
 	text-align: center;
 	border-bottom-left-radius: 35%;
-	background-color: 99FF00;
+	background-color: #99FF00;
 	opacity: 0.5;
 }
 
@@ -61,10 +63,11 @@ input[type=file] {
 }
 
 #navbar {
+	height: 10%;
 	float: left;
 	text-align: center;
 	border-bottom: 1px solid black;
-	background-color: 99FF00;
+	background-color: #99FF00;
 	opacity: 0.5;
 	width: 92%;
 }
@@ -86,7 +89,7 @@ input[type=file] {
     clear: left;
 }
 
-/* DIMMING THE BACKGROUND*/
+ /*DIMMING THE BACKGROUND*/
 
 #bodyDim {
 	width: 100%;
@@ -99,7 +102,9 @@ input[type=file] {
 /*STYLING OF THE MAP DIV*/
 
 #map {
-	height: 50%;
-	width: 50%;
+	height: 500px;
+	width: 500px;
     margin: auto auto;
 }
+
+
