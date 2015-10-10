@@ -1,4 +1,4 @@
-body,div,input,html
+body,div,input,html,header,span
 {
 	margin:0px;
 	padding:0px;
@@ -18,18 +18,6 @@ input[type=submit] {
 	background-color: lightgreen;
 }
 
-#reg_text {
-	border: 1px solid black;
-	color: white;
-	text-align: center;
-	width: 8%;
-	position: absolute;
-	bottom: 91%;
-	left: 91%;
-	height:60px;
-	width: 115px;
-}
-
 #upload-button{
 	position: absolute;
 	left: 46%;
@@ -41,10 +29,27 @@ input[type=file] {
 	display: none;
 }
 
+#reg_div {
+	border: 1px solid black;
+	width: 8%;
+	position: absolute;
+	left: 92%;
+	height: 12%;
+	text-align: center;
+	border-bottom-left-radius: 62%;
+	background-color: lightgreen;
+	opacity: 0.5;
+}
+
+#reg_text {
+	position: relative;
+	top: 35%;
+	left: 6%;
+}
 
 #title {
-	padding-top: 0px;
-	margin-bottom: 0px;
+	padding: 0px;
+	margin: 0px;
 }
 
 #navbar {
@@ -53,20 +58,21 @@ input[type=file] {
 	border-bottom: 1px solid black;
 	background-color: lightgreen;
 	opacity: 0.5;
-	width: 100%;
+	width: 92%;
 }
 
 .FirstRow {
-	margin-top: 4%;
-	margin-left: 1%;
+	margin-top: 6%;
+	margin-left: 3%;
 }
 
 .SecondColumn {
-	margin-left: 14%;
+	margin-left: 10%;
 }
 	
 #nav { 
     text-align: center;
+    clear: left;
 }
 
 /* DIMMING THE BACKGROUND*/
