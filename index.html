@@ -23,7 +23,7 @@
  		function sub(obj){
     		var file = obj.value;
     		var fileName = file.split("\\");
-    		document.getElementById("yourBtn").innerHTML = fileName[fileName.length-1];
+    		document.getElementById("upload-button").innerHTML = fileName[fileName.length-1];
     		document.myForm.submit();
     		event.preventDefault();
   		}
@@ -44,55 +44,54 @@
 		</a>
 		<div id="nav">
 			<div>
-				<input type="submit" value = "VIEW MAP" class = "FirstRow" onclick="mapOpen()" />
+				<input type="submit" value = "VIEW MAP" class = "FirstRow" onclick="" />
 				<input type="submit" value = "PLANT TREE" class = "FirstRow SecondColumn"/>
 			</div>
-			<div class="file_upload" onclick="getFile()">	
-				<input type="file" id="upfile" name="files[]" multiple onchange="sub(this)"/>	
-				<input type="submit" value="UPLOAD" id="upload-button"/>
+			<div class="file_upload" onclick="getFile()">		
+				<form enctype="multipart/form-data" action="" method="post" name="myForm">
+					<input type="submit" value="UPLOAD" id="upload-button" onclick="getFile()" />
+    				<input id="upfile" type="file" value="upload" name="files[]" multiple onchange="sub(this)" />
+				</form>
 				
-				<script class="upload_script">
-  					function handleFileSelect(evt) {
-    					var files = evt.target.files; // FileList object
+				// <script class="upload_script">
+  		// 			function handleFileSelect(evt) {
+    // 					var files = evt.target.files; // FileList object
 
-    					// Loop through the FileList and render image files as thumbnails.
-    					for (var i = 0, f; f = files[i]; i++) {
+    // 					// Loop through the FileList and render image files as thumbnails.
+    // 					for (var i = 0, f; f = files[i]; i++) {
 
-      					// Only process image files.
-      						if (!f.type.match('image.*')) {
-        						continue;
-      						}					
+    //   					// Only process image files.
+    //   						if (!f.type.match('image.*')) {
+    //     						continue;
+    //   						}					
 
-      						var reader = new FileReader();
+    //   						var reader = new FileReader();
 
-      						// Closure to capture the file information.
-      						reader.onload = (function(theFile) {
-        						return function(e) {
-          							// Render thumbnail.
-          							var span = document.createElement('span');
-          							span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                            		'" title="', escape(theFile.name), '"/>'].join('');
-          							document.getElementById('list').insertBefore(span, null);
-        						};
-      						})(f);
+    //   						// Closure to capture the file information.
+    //   						reader.onload = (function(theFile) {
+    //     						return function(e) {
+    //       							// Render thumbnail.
+    //       							var span = document.createElement('span');
+    //       							span.innerHTML = ['<img class="thumb" src="', e.target.result,
+    //                         		'" title="', escape(theFile.name), '"/>'].join('');
+    //       							document.getElementById('list').insertBefore(span, null);
+    //     						};
+    //   						})(f);
 
-     						 // Read in the image file as a data URL.
-      						reader.readAsDataURL(f);
-    					}
-  					}
+    //  						 // Read in the image file as a data URL.
+    //   						reader.readAsDataURL(f);
+    // 					}
+  		// 			}
 
-  					document.getElementById('upfile').addEventListener('change', handleFileSelect, false);
-				</script>
-
+  		// 			document.getElementById('upfile').addEventListener('change', handleFileSelect, false);
+				 // </script>
+				
 				<output id="list"></output>
 			</div>
 		</div>
 	</div>
 	<script>
-		function mapOpen()
-		{
-			window.open("html/api_test.html","_parent");
-		}
+		
 	</script>
 </body>
 </html>
