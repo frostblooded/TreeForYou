@@ -3,7 +3,19 @@
 <head>
 	<title>FIRST_PAGE</title>
 	<link rel = "stylesheet" type="text/css" href = "css/first_button_style.css">
+	<style>
+  		.thumb {
+    		height: 75px;
+    		border: 1px solid #000;
+    		margin: 10px 5px 0 0;
+  		}
+	</style>
 	<script type="text/javascript">
+ 		if (window.File && window.FileReader && window.FileList && window.Blob) {
+  	// Great success! All the File APIs are supported.
+		} else {
+  			alert('The File APIs are not fully supported in this browser.');
+		}
  		function getFile(){
    			document.getElementById("upfile").click();
  		}
@@ -17,27 +29,70 @@
 	</script>	
 </head>
 <body>
+
 	<div id = "bodyDim">
 		<div id="navbar">
 			<header>
 				<h1 id="title">Tree for you</h1>
-				<div id="reg">
-					<div id="reg_text">REGISTER</div>
-				</div>
 			</header>
 		</div>
-		
+		<a href = "html/registration.html">
+			<div id="reg_div">	
+				<span id="reg_text">REGISTER</span>
+			</div>
+		</a>
 		<div id="nav">
 			<div>
-				<input type="submit" value = "VIEW MAP" class = "FirstRow"/>
+				<input type="submit" value = "VIEW MAP" class = "FirstRow" onclick="mapOpen()" />
 				<input type="submit" value = "PLANT TREE" class = "FirstRow SecondColumn"/>
 			</div>
 			<div class="file_upload" onclick="getFile()">	
-				<input type="file" id="upfile" onchange="sub(this)"/>	
+				<input type="file" id="upfile" name="files[]" multiple onchange="sub(this)"/>	
 				<input type="submit" value="UPLOAD" id="upload-button"/>
+				
+				<script class="upload_script">
+  					function handleFileSelect(evt) {
+    					var files = evt.target.files; // FileList object
+
+    					// Loop through the FileList and render image files as thumbnails.
+    					for (var i = 0, f; f = files[i]; i++) {
+
+      					// Only process image files.
+      						if (!f.type.match('image.*')) {
+        						continue;
+      						}					
+
+      						var reader = new FileReader();
+
+      						// Closure to capture the file information.
+      						reader.onload = (function(theFile) {
+        						return function(e) {
+          							// Render thumbnail.
+          							var span = document.createElement('span');
+          							span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            		'" title="', escape(theFile.name), '"/>'].join('');
+          							document.getElementById('list').insertBefore(span, null);
+        						};
+      						})(f);
+
+     						 // Read in the image file as a data URL.
+      						reader.readAsDataURL(f);
+    					}
+  					}
+
+  					document.getElementById('upfile').addEventListener('change', handleFileSelect, false);
+				</script>
+
+				<output id="list"></output>
 			</div>
 		</div>
 	</div>
+	<script>
+		function mapOpen()
+		{
+			window.open("html/api_test.html");
+		}
+	</script>
 </body>
 </html>
 

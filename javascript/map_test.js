@@ -8,7 +8,7 @@ function initMap() {
     center: {lat: 42.662810, lng: 23.373413},
     zoom: 17,
     streetViewControl: false,
-    mapTypeControl: false
+    mapTypeControl: true
   });
 
 
