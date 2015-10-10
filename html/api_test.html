@@ -17,9 +17,11 @@
 		<!-- Map div -->
 		<div id="map"></div>
 
-		 <button onclick="getCoords()" type="button">Get Marker Coordinates</button> 
+		<button onclick="getCoords()" type="button">Get Marker Coordinates</button> 
+
 		<script>
 		function getCoords() {
+			
 			if(marker != null)
 			{
 				alert("lat: " + marker.getPosition().lat() + ", lng: " + marker.getPosition().lng());

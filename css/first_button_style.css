@@ -1,5 +1,6 @@
-body,div,input,html
+body,div,input,html,header,span
 {
+	/*height: 100%;*/
 	margin:0px;
 	padding:0px;
 }
@@ -10,24 +11,13 @@ body {
 	background-size: cover;
 }
 
+
 input[type=submit] {
 	height: 17%;
 	width: 10%;
 	border-radius: 100%;
 	opacity: 0.5;
 	background-color: 99FF00;
-}
-
-#reg_text {
-	border: 1px solid black;
-	color: white;
-	text-align: center;
-	width: 8%;
-	position: absolute;
-	bottom: 91%;
-	left: 91%;
-	height:60px;
-	width: 115px;
 }
 
 #upload-button{
@@ -45,10 +35,27 @@ input[type=file] {
 	display: none;
 }
 
+#reg_div {
+	border: 1px solid black;
+	width: 8%;
+	position: absolute;
+	left: 92%;
+	height: 12%;
+	text-align: center;
+	border-bottom-left-radius: 35%;
+	background-color: #99FF00;
+	opacity: 0.5;
+}
+
+#reg_text {
+	position: relative;
+	top: 35%;
+	left: 6%;
+}
 
 #title {
-	padding-top: 0px;
-	margin-bottom: 0px;
+	padding: 0px;
+	margin: 0px;
 	font-family: "Times New Roman", Times, serif;
 	font-style: italic;
 	font-size: 50px;
@@ -56,12 +63,13 @@ input[type=file] {
 }
 
 #navbar {
+	height: 10%;
 	float: left;
 	text-align: center;
 	border-bottom: 1px solid black;
-	background-color: 99FF00;
+	background-color: #99FF00;
 	opacity: 0.5;
-	width: 100%;
+	width: 92%;
 }
 
 .FirstRow {
@@ -73,14 +81,15 @@ input[type=file] {
 }
 
 .SecondColumn {
-	margin-left: 14%;
+	margin-left: 10%;
 }
 	
 #nav { 
     text-align: center;
+    clear: left;
 }
 
-/* DIMMING THE BACKGROUND*/
+ /*DIMMING THE BACKGROUND*/
 
 #bodyDim {
 	width: 100%;
@@ -93,7 +102,9 @@ input[type=file] {
 /*STYLING OF THE MAP DIV*/
 
 #map {
-	height: 50%;
-	width: 50%;
+	height: 500px;
+	width: 500px;
     margin: auto auto;
 }
+
+
