@@ -5,7 +5,7 @@ body,div,input,html
 }
 
 body {
-	background-image: url("background.jpg");
+	background-image: url("background.png");
 	background-attachment: fixed;
 	background-size: cover;
 }
@@ -18,7 +18,7 @@ input[type=submit] {
 	background-color: lightgreen;
 }
 
-.file_upload {
+/*.file_upload {
 	margin-left: 46%;
 	margin-top: 5%;
 	border: 1px solid gray;
@@ -29,36 +29,39 @@ input[type=submit] {
 	width: 10%;
 	cursor: pointer;
 }
+*/
 
 #reg {
-	float: right;
 	border: 1px solid black;
-}
-
-#reg, #navbar {
-	display: inline-block;
+	width: 7%;
+	padding-top: 0%;
+	margin-bottom: 0%;
+	color: white;
 }
 
 #upload-button{
 	position: absolute;
-	top: 55%;
-	bottom: 50%;
-	left: 48.5%;
+	left: 46.5%;
+	
 }
 
 input[type=file] {
 	display: none;
 }
 
+
 #title {
-	padding-top: 0%;
-	margin-bottom: 0%;
+	padding-top: 0px;
+	margin-bottom: 0px;
 }
+
 #navbar {
+	float: left;
 	text-align: center;
 	border-bottom: 1px solid black;
 	background-color: lightgreen;
 	opacity: 0.5;
+	width: 93%;
 }
 
 .FirstRow {
@@ -70,8 +73,7 @@ input[type=file] {
 	margin-left: 14%;
 }
 	
-#nav {
-	display: inline;  
+#nav { 
     text-align: center;
 }
 
