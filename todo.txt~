@@ -1,4 +1,5 @@
 Registration:
+-Make success or error show up in a div under the submit button
 -After registration is complete, send user to main page
 
 Map:
