@@ -352,29 +352,13 @@ function updateMarker(){
 
 	if(currentMarker)
 	{
-		spaceContent = '<div id = "contentsDiv">' +
-						'<h3 id = "infoTitle">'+currentTitle+'</h3><div class="clear"></div><p id = "infoDescription">'+currentDescription+'</p><div class="clear"></div>' +
-						'<a id="spot-image-big" href="large_image.jpg" class="fancybox" title="Sample title"><img id="spot-image" src="#" /></a>'+
-						'<span id = "infoAddButton">'+
-							'<span id="image-upload"><label for="file-input"><img id="image-label" src="images/add_picture.png"/>'+
-							'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
-						'</span>'+
-						'<div class="clear"></div>'+
-						'<span id = "DeleteButton">'+
-							'<button onclick="deleteMarker()">Delete</button>'+
-						'</span>'+
-						'<span id = "UpdateButton">'+
-							'<button onclick="updateMarker()">Update</button>'+
-						'</span>'+
-						'<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>'+
-					'</div>';
-
 		var ParseSpace = Parse.Object.extend("Spaces");
 		var query = new Parse.Query(ParseSpace);
 		var id = findId(currentMarker);
 		$("#saving").show();
 		query.get(id, {
 		  success: function(object) {
+				consol.log(object);
 			    var fileUploadControl = $("#file-input")[0];
 
 				var file = fileUploadControl.files[0];
@@ -389,6 +373,7 @@ function updateMarker(){
 					object.set("image2", parseFile);
 					object.set("plantedTree", true)		
 					currentMarker.info.close();
+					currentMarker.setIcon("../images/tree_small.png");
 					currentMarker = 0;
 					removeMarker = false;
 					object.save();		
