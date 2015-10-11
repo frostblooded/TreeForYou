@@ -12,23 +12,23 @@
     		margin: 10px 5px 0 0;
   		}
 	</style>
-	<script type="text/javascript">
- 		if (window.File && window.FileReader && window.FileList && window.Blob) {
-  	// Great success! All the File APIs are supported.
-		} else {
-  			alert('The File APIs are not fully supported in this browser.');
-		}
- 		function getFile(){
-   			document.getElementById("upfile").click();
- 		}
- 		function sub(obj){
-    		var file = obj.value;
-    		var fileName = file.split("\\");
-    		document.getElementById("upload-button").innerHTML = fileName[fileName.length-1];
-    		document.myForm.submit();
-    		event.preventDefault();
-  		}
-	</script>	
+	  <script type="text/javascript">
+ 	// 	if (window.File && window.FileReader && window.FileList && window.Blob) {
+  // 	// Great success! All the File APIs are supported.
+		// } else {
+  // 			alert('The File APIs are not fully supported in this browser.');
+		// }
+ 	// 	function getFile(){
+  //  			document.getElementById("upfile").click();
+ 	// 	}
+ 	// 	function sub(obj){
+  //   		var file = obj.value;
+  //   		var fileName = file.split("\\");
+  //   		document.getElementById("upload-button").innerHTML = fileName[fileName.length-1];
+  //   		document.myForm.submit();
+  //   		event.preventDefault();
+  // 		}
+	 // </script>	
 </head>
 <body>
 
@@ -46,13 +46,13 @@
 		<div id="nav">
 			<div>
 				<input type="submit" value = "VIEW MAP" class = "FirstRow" onclick="mapOpen()" />
-				<input type="submit" value = "PLANT TREE" class = "FirstRow SecondColumn"/>
+				<!-- <input type="submit" value = "PLANT TREE" class = "FirstRow SecondColumn"/> -->
 			</div>
-			<div class="file_upload" onclick="getFile()">		
+		<!-- 	<div class="file_upload" onclick="getFile()">		
 				<form enctype="multipart/form-data" action="" method="post" name="myForm">
 					<input type="submit" value="UPLOAD" id="upload-button" onclick="getFile()" />
     				<input id="upfile" type="file" value="upload" name="files[]" multiple onchange="sub(this)" />
-				</form>
+				</form> -->
 				
 				<script class="upload_script">
 					function mapOpen() {
