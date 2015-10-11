@@ -1,0 +1,8 @@
+Registration:
+-After registration is complete, send user to main page
+
+Map:
+-Fix bottom button styling
+-Fix "Saving..." string if there is nothing to be saved
+
+-Clean up project's folders

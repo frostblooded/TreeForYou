@@ -1,0 +1,46 @@
+<script src="javascript/jquery-1.11.3.js"></script>
+<script src="javascript/parse-1.6.5.js"></script>
+<fieldset>
+    <input type="file" name="fileselect" id="fileselect"></input>
+    <input id="uploadbutton" type="button" value="Upload"> </input>
+</fieldset>
+<script>
+//initialize parse with the DB keys	
+Parse.initialize("ypv4dSS2h2pN6UTduc8hC9czpjBRJIklN7gN4ULv", "EgGSdtxDzc7GtuIvnGaaF3NBbRmuRRPq6B6yKbRV");
+	
+$('#uploadbutton').click(function () {
+		//make type for objects for the Spaces Class in the DB
+		var ParseSpace = Parse.Object.extend("Spaces");
+		//make new object of that type
+		var new_parse_space = new ParseSpace();
+		//new geopoint for the marker
+		var space_pos = new Parse.GeoPoint(1.0, 2.0);
+		//the coordinates variable of the marker is being set
+		new_parse_space.set("coordinates", space_pos);
+	
+		var fileUploadControl = $("#fileselect")[0];
+		//get the file from the html element
+		var file = fileUploadControl.files[0];
+		//name for the file
+		var name = "image.jpg";
+		//make the file ready for the DB
+		var parseFile = new Parse.File(name, file);
+		
+		//set tge image for the DB variable
+		new_parse_space.set("image", parseFile);
+	
+	
+		//save the variable in the DB
+		new_parse_space.save(null, {
+			//if it succedes
+			success: function(object) {
+			},
+			//if there is an error
+			error: function(model, error) {
+					alert("Error: " + error.code + " " + error.message);
+			}
+		});
+	
+    
+});
+</script>
