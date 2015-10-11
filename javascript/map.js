@@ -123,6 +123,7 @@ function placeMarker(pos, map){
 		hideInfos();
 		this.info.open(map, this);
 		removeMarker = !findId(currentMarker);
+		currentMarker = this;
 		setImage(findId(this));
 	});
 
@@ -358,7 +359,6 @@ function editDescription()
 }
 
 function updateMarker(){
-
 	if(currentMarker)
 	{
 
@@ -383,7 +383,6 @@ function updateMarker(){
 					object.set("plantedTree", true);
 					currentMarker.setIcon("../images/tree_small.png");		
 					currentMarker.info.close();
-					currentMarker = 0;
 					removeMarker = false;
 					object.save();		
 				}
