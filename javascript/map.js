@@ -197,21 +197,30 @@ function getFileName()
 
 function saveMarker(){
 
-	spaceContent = '<div id = "contentsDiv">' +
-					'<h3 id = "infoTitle">'+currentTitle+'</h3><div class="clear"></div><p id = "infoDescription">'+currentDescription+'</p><div class="clear"></div>' +
-					'<a id="spot-image-big" href="large_image.jpg" class="fancybox" title="Sample title"><img id="spot-image" src="#" /></a>'+
-					'<span id = "infoAddButton">'+
-						'<span id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
-						'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
-					'</span>'+
+	spaceContent = '<div style = "background-color: color: black">'+
+	'<h3 id = "infoTitle">'+currentTitle+'</h3><div class="clear"></div><p id = "infoDescription"> '+currentDescription+' </p><div class="clear"></div>' +
+
+	'<table style="width:100%"><tr id = "infoTR"><td id = "infoTD"><center></div>' + 
+						'<a id="spot-image-big" href="large_image.jpg" class="fancybox" title="Sample title"><img id="spot-image" src="#" /></a>'+
+						'</center></td>'+
+		'<td id = "infoTD"><center>'+
+						'<span id = "infoAddButton">'+
+							'<span id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
+							'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
+						'</span>'+
+					'</div></center></td></tr>'+
+					'<tr id = "infoTR"><center><td id = "infoTD">'+
+					'<center>'+
 					'<span id = "DeleteButton">'+
-						'<button onclick="deleteMarker()">Delete</button>'+
-					'</span>'+
+							'<button onclick="deleteMarker()">Delete</button>'+
+						'</span>'+
+					'</center>'+
+					'</td>'+
+					'<td id = "infoTD">'+
 					'<span id = "UpdateButton">'+
-						'<button onclick="updateMarker()">Update</button>'+
-					'</span>'+
-					'<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>'+
-				'</div>';
+							'<button onclick="updateMarker()">Update</button>'+
+					'</span>'
+					'</td></center></tr></table></div>';
 
 	localStorage.clear();
 	var ParseSpace = Parse.Object.extend("Spaces");
@@ -352,22 +361,6 @@ function updateMarker(){
 
 	if(currentMarker)
 	{
-		spaceContent = '<div id = "contentsDiv">' +
-						'<h3 id = "infoTitle">'+currentTitle+'</h3><div class="clear"></div><p id = "infoDescription">'+currentDescription+'</p><div class="clear"></div>' +
-						'<a id="spot-image-big" href="large_image.jpg" class="fancybox" title="Sample title"><img id="spot-image" src="#" /></a>'+
-						'<span id = "infoAddButton">'+
-							'<span id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
-							'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
-						'</span>'+
-						'<div class="clear"></div>'+
-						'<span id = "DeleteButton">'+
-							'<button onclick="deleteMarker()">Delete</button>'+
-						'</span>'+
-						'<span id = "UpdateButton">'+
-							'<button onclick="updateMarker()">Update</button>'+
-						'</span>'+
-						'<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>'+
-					'</div>';
 
 		var ParseSpace = Parse.Object.extend("Spaces");
 		var query = new Parse.Query(ParseSpace);
@@ -387,7 +380,8 @@ function updateMarker(){
 					var parseFile = new Parse.File(name, file);
 
 					object.set("image2", parseFile);
-					object.set("plantedTree", true)		
+					object.set("plantedTree", true);
+					currentMarker.setIcon("../images/tree_small.png");		
 					currentMarker.info.close();
 					currentMarker = 0;
 					removeMarker = false;
