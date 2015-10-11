@@ -20,13 +20,13 @@ input{
 	border-radius: 10%; 
 	width: 25%;
 	margin-left: 35%;
-	opacity: 0.8;
+	opacity: 0.9;
 }
 
 #username, #password, #reentered_password, #email{
 
 	border-radius: 0,5%;
-	opacity: 0.6;
+	opacity: 0.7;
 }
 
 body {
