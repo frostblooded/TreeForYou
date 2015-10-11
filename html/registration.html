@@ -26,10 +26,18 @@
             <div class="form-group">
                 <b> <input class="form-control" type="email" id="email" placeholder="E-mail"> </b>
             </div>
+            
+
             <div class="form-group">
+                <span id="success">Success!</span>
                <b> <input class="form-control" type="button" id="submit_button" value="Register"> </b>
+               <span id="fail">Fail!</span>
+            </div>
+            <div id="error_msg">
             </div>
             <script>
+                $("#success").hide();
+                $("#fail").hide();
                 $("#submit_button").click(function(){
                     var username = $("#username").val();
                     var password = $("#password").val();
@@ -49,15 +57,18 @@
                         newUser.set("password", password);
                         newUser.signUp(null, {
                             success: function(user) {
-                                alert("Success!");
+                                $("#success").show();
 
                                 // Hooray! Let them use the app now.
                             },
                             error: function(user, error) {
                             // Show the error message somewhere and let the user try again.
-                                alert("Error: " + error.code + " " + error.message);
+                                $("#fail").show();
+                                $("#error_msg").html(error.message);
                             }
                         });
+                        $("#success").hide();
+                        $("#fail").hide();
                     }
                 });
             </script>

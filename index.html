@@ -52,7 +52,7 @@
 		</div>
 		<div id="nav">
 			<div>
-				<input type="submit" value = "VIEW MAP" class = "FirstRow" onclick="" />
+				<input type="submit" value = "VIEW MAP" class = "FirstRow" onclick="mapOpen()" />
 				<input type="submit" value = "PLANT TREE" class = "FirstRow SecondColumn"/>
 			</div>
 			<div class="file_upload" onclick="getFile()">		
@@ -61,7 +61,10 @@
     				<input id="upfile" type="file" value="upload" name="files[]" multiple onchange="sub(this)" />
 				</form>
 				
-				// <script class="upload_script">
+				<script class="upload_script">
+					function mapOpen() {
+						window.open("html/add_space.html","_self");
+					}
   		// 			function handleFileSelect(evt) {
     // 					var files = evt.target.files; // FileList object
 
@@ -92,7 +95,7 @@
   		// 			}
 
   		// 			document.getElementById('upfile').addEventListener('change', handleFileSelect, false);
-				 // </script>
+				</script>
 				
 				<output id="list"></output>
 			</div>
