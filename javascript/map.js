@@ -13,13 +13,14 @@ var editingDescription = false;
 
 $(document).ready(function(){
 	Parse.initialize("ypv4dSS2h2pN6UTduc8hC9czpjBRJIklN7gN4ULv", "EgGSdtxDzc7GtuIvnGaaF3NBbRmuRRPq6B6yKbRV");
+	$("#saving").hide();
 	loadMarkers();
 });
 
 function initMap() {	
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: 42.667877, lng: 25.163029},
-		zoom: 16
+		zoom: 8
 	});
 	google.maps.event.addListener(map, "click", function(e) {
 		placeMarker(e.latLng, map);
@@ -30,9 +31,12 @@ function initMap() {
     	navigator.geolocation.getCurrentPosition(function(position) {
       	initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
       	map.setCenter(initialLocation);
-    	}, function() {
-      		handleNoGeolocation(browserSupportFlag);
-    	});
+    	}
+					//bugs out for me
+				 //, function() {
+      	//	handleNoGeolocation(browserSupportFlag);
+    		//}
+																							);
 	}
 	// Browser doesn't support Geolocation
 	else {
@@ -52,10 +56,10 @@ function setImage(id)
 {
 	var ParseSpace = Parse.Object.extend("Spaces");
 	var query = new Parse.Query(ParseSpace);
-
+	$("#saving").show();
 	query.get(id, {
 	  success: function(object) {
-		    var imageFile = object.get('image');
+		  var imageFile = object.get('image');
 			var imageURL = imageFile.url();
 			$('#spot-image')[0].src = imageURL;
 			$('#spot-image-big')[0].href = imageURL;
@@ -70,9 +74,11 @@ function setImage(id)
 			{
 				$('#image-label')[0].src = "../images/add_picture.png";
 			}
+			$("#saving").hide();
 	  },
 	  error: function(object, error) {
 	    alert ("error "+ error.code);
+			$("#saving").hide();
 	  }
 	});
 }
@@ -220,7 +226,7 @@ function saveMarker(){
 		var parseFile = new Parse.File(name, file);
 
 		new_parse_space.set("image", parseFile);
-
+		$("#saving").show();
 		new_parse_space.save(null, {
 			success: function(object) {			
 				currentMarker.info.close();			
@@ -230,11 +236,12 @@ function saveMarker(){
 				markers[new_parse_space.id].info = new google.maps.InfoWindow({
 					content: spaceContent
 				});
-				alert("Success");
+				$("#saving").hide();
 			},
 			error: function(model, error) {
 			// Show the error message somewhere and let the user try again.
 					alert("Error: " + error.code + " " + error.message);
+					$("#saving").hide();
 			}
 		});
 	}
@@ -275,13 +282,16 @@ function deleteMarker(){
 	{
 		var ParseSpace = Parse.Object.extend("Spaces");
 		var query = new Parse.Query(ParseSpace);
+		$("#saving").show();
 
 		query.get(findId(currentMarker), {
 		  success: function(object) {
 			    object.destroy();
+				$("#saving").hide();
 		  },
 		  error: function(object, error) {
 		    alert ("error "+ error.code);
+				$("#saving").hide();
 		  }
 		});
 
@@ -348,6 +358,7 @@ function updateMarker(){
 		var ParseSpace = Parse.Object.extend("Spaces");
 		var query = new Parse.Query(ParseSpace);
 		var id = findId(currentMarker);
+		$("#saving").show();
 		query.get(id, {
 		  success: function(object) {
 			    var fileUploadControl = $("#file-input")[0];
@@ -365,16 +376,17 @@ function updateMarker(){
 					currentMarker.info.close();
 					currentMarker = 0;
 					removeMarker = false;
-					object.save();
-					alert("Success");				
+					object.save();		
 				}
 				else
 				{
 					alert("You must add an image!");
 				}
+				$("#saving").hide();
 		  },
 		  error: function(object, error) {
 		    alert ("error "+ error.code);
+				$("#saving").hide();
 		  }
 		});
 	}
