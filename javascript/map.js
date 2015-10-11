@@ -1,6 +1,4 @@
-class 
-
-var markers = new Array();
+var markers = [];
 var map;
 var currentMarker = null;
 var initialLocation;
@@ -10,6 +8,8 @@ var addSpaceContent;
 var removeMarker = false;
 var currentTitle = "Title";
 var currentDescription = "You can plant a tree here";
+var editingTitle = false;
+var editingDescription = false;
 
 $(document).ready(function(){
 	Parse.initialize("ypv4dSS2h2pN6UTduc8hC9czpjBRJIklN7gN4ULv", "EgGSdtxDzc7GtuIvnGaaF3NBbRmuRRPq6B6yKbRV");
@@ -41,6 +41,55 @@ function initMap() {
 	}
 }
 
+function hideInfos()
+{
+	for (var key in markers) {
+	    markers[key].info.close();
+	}
+}
+
+function setImage(id)
+{
+	var ParseSpace = Parse.Object.extend("Spaces");
+	var query = new Parse.Query(ParseSpace);
+
+	query.get(id, {
+	  success: function(object) {
+		    var imageFile = object.get('image');
+			var imageURL = imageFile.url();
+			$('#spot-image')[0].src = imageURL;
+			$('#spot-image-big')[0].href = imageURL;
+
+			imageFile = object.get('image2');
+			if(imageFile)
+			{
+				imageURL = imageFile.url();
+				$('#image-label')[0].src = imageURL;
+			}
+			else
+			{
+				$('#image-label')[0].src = "../images/add_picture.png";
+			}
+	  },
+	  error: function(object, error) {
+	    alert ("error "+ error.code);
+	  }
+	});
+}
+
+function findId(mark)
+{
+	for (var key in markers) {
+
+	    if(markers[key] == mark)
+	    {
+	    	return key;
+	    }
+	}
+
+	return false;
+}
+
 function placeMarker(pos, map){	
 
 	if(removeMarker)
@@ -52,9 +101,7 @@ function placeMarker(pos, map){
 		removeMarker = true;
 	}
 
-	for (i = 0; i < markers.length; i++) {
-		markers[i].info.close();
-	}
+	hideInfos()
 
 	currentMarker = new google.maps.Marker({
 		position: pos,
@@ -67,11 +114,10 @@ function placeMarker(pos, map){
 	});
 	
 	currentMarker.addListener("click", function(){
+		hideInfos();
 		this.info.open(map, this);
-		removeMarker = true;
-		for (i = 0; i < markers.length; i++) {
-			markers[i].info.close();
-		}			
+		removeMarker = !findId(currentMarker);
+		setImage(findId(this));
 	});
 
 	currentMarker.info.open(map, currentMarker);
@@ -83,20 +129,19 @@ function loadMarkers(){
 	query.find({
 		success: function(results){
 			for(var i = 0; i < results.length; i++){
+				var id = results[i].id;
 				var marker_pos = results[i].get("coordinates");
-				markers[markers.length] = new google.maps.Marker({
+				markers[id ] = new google.maps.Marker({
 					position: new google.maps.LatLng(marker_pos.latitude, marker_pos.longitude),
 					icon: "../images/freespot.png"
 				});
 				
-				markers[markers.length-1].info = new google.maps.InfoWindow({
+				markers[id].info = new google.maps.InfoWindow({
 					content: results[i].get("info")
 				});
 				
-				markers[markers.length-1].addListener("click", function(){
-					for (i = 0; i < markers.length; i++) {
-						markers[i].info.close();
-					}
+				markers[id].addListener("click", function(){
+					hideInfos()
 
 					if(removeMarker)
 					{		
@@ -109,9 +154,11 @@ function loadMarkers(){
 
 					this.info.open(map, this);
 					removeMarker = false;
+					currentMarker = this;
+					setImage(findId(this));
 				});
 				
-				markers[markers.length-1].setMap(map);
+				markers[id].setMap(map);
 			}
 		},
 		error: function(error){
@@ -134,6 +181,21 @@ function getFileName()
 }
 
 function saveMarker(){
+
+	spaceContent = '<div id = "contentsDiv">' +
+					'<h3 id = "infoTitle">'+currentTitle+'</h3><div class="clear"></div><p id = "infoDescription">'+currentDescription+'</p><div class="clear"></div>' +
+					'<a id="spot-image-big" href="large_image.jpg" class="fancybox" title="Sample title"><img id="spot-image" src="#" /></a>'+
+					'<span id = "infoAddButton">'+
+						'<span id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
+						'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
+					'</span>'+
+					'<span id = "DeleteButton">'+
+						'<button onclick="deleteMarker()">Delete</button>'+
+					'</span>'+
+					'<span id = "UpdateButton">'+
+						'<button onclick="updateMarker()">Update</button>'+
+					'</span>'+
+				'</div>';
 
 	localStorage.clear();
 	var ParseSpace = Parse.Object.extend("Spaces");
@@ -162,10 +224,10 @@ function saveMarker(){
 		new_parse_space.save(null, {
 			success: function(object) {			
 				currentMarker.info.close();			
-				markers[markers.length] = currentMarker;
+				markers[new_parse_space.id] = currentMarker;
 				currentMarker = 0;
 				removeMarker = false;
-				markers[markers.length-1].info = new google.maps.InfoWindow({
+				markers[new_parse_space.id].info = new google.maps.InfoWindow({
 					content: spaceContent
 				});
 				alert("Success");
@@ -174,7 +236,7 @@ function saveMarker(){
 			// Show the error message somewhere and let the user try again.
 					alert("Error: " + error.code + " " + error.message);
 			}
-		});	
+		});
 	}
 	else
 	{
@@ -208,11 +270,119 @@ function readURL(input) {
 }
 
 function deleteMarker(){
-	currentMarker.setMap(null);
+
+	if(currentMarker)
+	{
+		var ParseSpace = Parse.Object.extend("Spaces");
+		var query = new Parse.Query(ParseSpace);
+
+		query.get(findId(currentMarker), {
+		  success: function(object) {
+			    object.destroy();
+		  },
+		  error: function(object, error) {
+		    alert ("error "+ error.code);
+		  }
+		});
+
+		currentMarker.setMap(null);
+	}
 }
 
+function editTitle()
+{	
+	if(!editingTitle)
+	{
+		$("#infoTitle").before('<input type="text" id = "titleEdit" class = "editingBox" name="" value="'+$("#infoTitle").html()+'">');
+		document.getElementById("infoTitle").style.display = 'none';		
+	}
+	else
+	{
+		currentTitle = $('#titleEdit').val();
+		$("#infoTitle").html(currentTitle);
+		document.getElementById("infoTitle").style.display = 'block';
+		$("#titleEdit").remove();
+
+	}
+
+	editingTitle = !editingTitle;
+}
+
+function editDescription()
+{
+	if(!editingDescription)
+	{
+		$("#infoDescription").before('<input type="text" id = "descriptionEdit" class = "editingBox" name="" value="'+$("#infoDescription").html()+'">');
+		document.getElementById("infoDescription").style.display = 'none';
+	}
+	else
+	{
+		currentDescription = $('#descriptionEdit').val();
+		$("#infoDescription").html(currentDescription);
+		document.getElementById("infoDescription").style.display = 'block';
+		$("#descriptionEdit").remove();
+	}
+
+	editingDescription = !editingDescription;
+}
+
+function updateMarker(){
+
+	if(currentMarker)
+	{
+		spaceContent = '<div id = "contentsDiv">' +
+						'<h3 id = "infoTitle">'+currentTitle+'</h3><div class="clear"></div><p id = "infoDescription">'+currentDescription+'</p><div class="clear"></div>' +
+						'<a id="spot-image-big" href="large_image.jpg" class="fancybox" title="Sample title"><img id="spot-image" src="#" /></a>'+
+						'<span id = "infoAddButton">'+
+							'<span id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
+							'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
+						'</span>'+
+						'<span id = "DeleteButton">'+
+							'<button onclick="deleteMarker()">Delete</button>'+
+						'</span>'+
+						'<span id = "UpdateButton">'+
+							'<button onclick="updateMarker()">Update</button>'+
+						'</span>'+
+					'</div>';
+
+		var ParseSpace = Parse.Object.extend("Spaces");
+		var query = new Parse.Query(ParseSpace);
+		var id = findId(currentMarker);
+		query.get(id, {
+		  success: function(object) {
+			    var fileUploadControl = $("#file-input")[0];
+
+				var file = fileUploadControl.files[0];
+
+				if(file)
+				{
+					//name for the file
+					var name = getFileName();
+					//make the file ready for the DB
+					var parseFile = new Parse.File(name, file);
+
+					object.set("image2", parseFile);		
+					currentMarker.info.close();
+					currentMarker = 0;
+					removeMarker = false;
+					object.save();
+					alert("Success");				
+				}
+				else
+				{
+					alert("You must add an image!");
+				}
+		  },
+		  error: function(object, error) {
+		    alert ("error "+ error.code);
+		  }
+		});
+	}
+};
+
 addSpaceContent = '<div id = "contentsDiv">' +
-					'<h3 id = "infoTitle">'+currentTitle+'</h3><p id = "infoDescription">'+currentDescription+'</p>' +
+					'<h3 id = "infoTitle">'+currentTitle+'</h3><input class ="editButton"type=image src = "../images/pencil.png" onclick = "editTitle()"><div class="clear"></div>'+
+					'<p id = "infoDescription">'+currentDescription+'</p> <input class ="editButton"type=image src = "../images/pencil.png" onclick = "editDescription()"><div class="clear"></div>' +
 					'<div id = "spotPicture"></div>'+
 					'<div id = "infoAddButton">'+
 						'<div id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
@@ -221,23 +391,6 @@ addSpaceContent = '<div id = "contentsDiv">' +
 					'<div id = "AcceptButton">'+
 						'<button onclick="saveMarker()">Accept</button>'+
 					'</div>'+
-				'</div>';
-
-spaceContent = '<div id = "contentsDiv">' +
-					'<h3 id = "infoTitle">'+currentTitle+'</h3><p id = "infoDescription">'+currentDescription+'</p>' +
-					'<div id = "spotPicture"></div>'+
-					'<div id = "infoAddButton">'+
-						'<div id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
-						'</label><input id="file-input" onchange="readURL(this)" type="file"/></div>'+
-					'</div>'+
-
-					'<span id = "DeleteButton">'+
-						'<button onclick="deleteMarker()">Delete</button>'+
-					'</span>'+
-
-					'<span id = "UpdateButton">'+
-						'<button onclick="saveMarker()">Update</button>'+
-					'</span>'+
 				'</div>';
 
 /*

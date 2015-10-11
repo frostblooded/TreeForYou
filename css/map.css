@@ -4,6 +4,10 @@ html, body, h3 {
 	padding: 0;
 }
 
+a{
+	outline: 0;
+}
+
 #map { 
 	height: 90%;
 	width: 100%;
@@ -18,11 +22,17 @@ html, body, h3 {
 
 #infoTitle {
 	margin: 5px;
+	float : left;
 }
 #infoAddButton {
 	/*background: red;*/
 	/*-webkit-transition: width 2s; 
 	transition: width 2s;*/	
+	display : block;
+}
+
+#infoDescription{
+	float:left;
 }
 
 #image_add_button{	
@@ -60,4 +70,26 @@ html, body, h3 {
 
 #UpdateButton{
 	margin-left: 10px;
+}
+
+#spot-image{
+	display: block;
+	min-width: 64px;
+	min-height: 64px;
+	max-width: 64px;
+	max-height: 64px;
+}
+
+#spotPicture
+{
+	float: left;
+}
+
+.editButton{
+	outline: 0;
+	clear: left;
+}
+
+.clear{
+	clear: left;
 }
