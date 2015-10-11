@@ -16,16 +16,16 @@ html, body, h3 {
 	cursor: pointer
 }
 
-.infoTitle {
+#infoTitle {
 	margin: 5px;
 }
-.infoAddButton {
+#infoAddButton {
 	/*background: red;*/
 	/*-webkit-transition: width 2s; 
 	transition: width 2s;*/	
 }
 
-.image_add_button{	
+#image_add_button{	
 }
 
 #Adding_picture {
@@ -34,10 +34,10 @@ html, body, h3 {
 	padding: 10px;
 }
 
-.image-upload{
+#image-upload{
 }
 
-.image-label{
+#image-label{
 	min-width: 64px;
 	min-height: 64px;
 	max-width: 64px;
@@ -45,11 +45,19 @@ html, body, h3 {
 
 }
 
-.image-upload > input
+#image-upload > input
 {
     display: none;
 }
 
-.AcceptButton{
+#AcceptButton{
 	margin-top: 5px;
+}
+
+#contentsDiv{
+	/*background-color:red;*/
+}
+
+#UpdateButton{
+	margin-left: 10px;
 }
