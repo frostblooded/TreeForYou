@@ -136,10 +136,19 @@ function loadMarkers(){
 		success: function(results){
 			for(var i = 0; i < results.length; i++){
 				var id = results[i].id;
+				var currIcon;
+
+				if(results[i].get("plantedTree"))
+				{
+					currIcon = "images/tree_small.png";
+				}
+				else{
+					currIcon = "images/freespot.png";
+				}
 				var marker_pos = results[i].get("coordinates");
 				markers[id ] = new google.maps.Marker({
 					position: new google.maps.LatLng(marker_pos.latitude, marker_pos.longitude),
-					icon: "images/freespot.png"
+					icon: currIcon
 				});
 				
 				markers[id].info = new google.maps.InfoWindow({
@@ -201,6 +210,7 @@ function saveMarker(){
 					'<span id = "UpdateButton">'+
 						'<button onclick="updateMarker()">Update</button>'+
 					'</span>'+
+					'<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>'+
 				'</div>';
 
 	localStorage.clear();
@@ -210,6 +220,8 @@ function saveMarker(){
 	// new_parse_space.set("objectId", $("#infoTitle").html());
 	new_parse_space.set("coordinates", space_pos);
 	new_parse_space.set("info", spaceContent);
+	new_parse_space.set("name", currentTitle);
+	new_parse_space.set("plantedTree", false);
 
 	// imageUpload
 
@@ -347,12 +359,14 @@ function updateMarker(){
 							'<span id="image-upload"><label for="file-input"><img id="image-label" src="images/add_picture.png"/>'+
 							'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
 						'</span>'+
+						'<div class="clear"></div>'+
 						'<span id = "DeleteButton">'+
 							'<button onclick="deleteMarker()">Delete</button>'+
 						'</span>'+
 						'<span id = "UpdateButton">'+
 							'<button onclick="updateMarker()">Update</button>'+
 						'</span>'+
+						'<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>'+
 					'</div>';
 
 		var ParseSpace = Parse.Object.extend("Spaces");
@@ -372,7 +386,8 @@ function updateMarker(){
 					//make the file ready for the DB
 					var parseFile = new Parse.File(name, file);
 
-					object.set("image2", parseFile);		
+					object.set("image2", parseFile);
+					object.set("plantedTree", true)		
 					currentMarker.info.close();
 					currentMarker = 0;
 					removeMarker = false;

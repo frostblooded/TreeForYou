@@ -15,8 +15,12 @@ input{
 	border-bottom: 1px solid #72FE95;
 	border-radius: 10%; 
 	width: 25%;
-	margin-left: 35%;
-	opacity: 0.9;
+	margin-left: 38%;
+	border-radius: 10%;
+	/*left: 46%;*/
+	min-width: 72px;
+	width: 8%;
+	opacity: 0.8;
 }
 
 .form-control{
