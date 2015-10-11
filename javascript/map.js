@@ -197,13 +197,20 @@ function getFileName()
 }
 
 function saveMarker(){
-	spaceContent = '<div id = "contentsDiv">' +
-					'<h3 id = "infoTitle">'+currentTitle+'</h3><div class="clear"></div><p id = "infoDescription">'+currentDescription+'</p><div class="clear"></div>' +
-					'<a id="spot-image-big" href="large_image.jpg" class="fancybox" title="Sample title"><img id="spot-image" src="#" /></a>'+
-					'<span id = "infoAddButton">'+
-						'<span id="image-upload"><label for="file-input"><img id="image-label" src="images/add_picture.png"/>'+
-						'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
-					'</span>'+
+	spaceContent = '<div style = "background-color: color: black">'+
+	'<h3 id = "infoTitle">'+currentTitle+'</h3><div class="clear"></div><p id = "infoDescription"> '+currentDescription+' </p><div class="clear"></div>' +
+
+	'<table style="width:100%"><tr id = "infoTR"><td id = "infoTD"><center></div>' + 
+						'<a id="spot-image-big" href="large_image.jpg" class="fancybox" title="Sample title"><img id="spot-image" src="#" /></a>'+
+						'</center></td>'+
+		'<td id = "infoTD"><center>'+
+						'<span id = "infoAddButton">'+
+							'<span id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
+							'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
+						'</span>'+
+					'</div></center></td></tr>'+
+					'<tr id = "infoTR"><center><td id = "infoTD">'+
+					'<center>'+
 					'<span id = "DeleteButton">'+
 							'<button onclick="deleteMarker()">Delete</button>'+
 						'</span>'+
@@ -359,7 +366,6 @@ function updateMarker(){
 		$("#saving").show();
 		query.get(id, {
 		  success: function(object) {
-				consol.log(object);
 			    var fileUploadControl = $("#file-input")[0];
 
 				var file = fileUploadControl.files[0];
@@ -373,13 +379,9 @@ function updateMarker(){
 
 					object.set("image2", parseFile);
 					object.set("plantedTree", true);
-					currentMarker.setIcon("../images/tree_small.png");		
+					currentMarker.setIcon("images/tree_small.png");		
 					currentMarker.info.close();
-<<<<<<< HEAD
-=======
-					currentMarker.setIcon("../images/tree_small.png");
 					currentMarker = 0;
->>>>>>> 718719ba7b858a16fc211b78b791640932cdd51e
 					removeMarker = false;
 					object.save();		
 				}
