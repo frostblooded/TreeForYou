@@ -353,10 +353,6 @@ function updateMarker(){
 
 	if(currentMarker)
 	{
-<<<<<<< HEAD
-=======
-
->>>>>>> 4abdd7e32af7ca933a55772599457436e80ca2f5
 		var ParseSpace = Parse.Object.extend("Spaces");
 		var query = new Parse.Query(ParseSpace);
 		var id = findId(currentMarker);
