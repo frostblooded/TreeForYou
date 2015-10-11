@@ -20,7 +20,7 @@ input[type=submit] {
 	background-color: 99FF00;
 }
 
-#upload-button{
+/*#upload-button{
 	position: absolute;
 	left: 46%;
 	top: 50%;
@@ -30,7 +30,7 @@ input[type=submit] {
 
 
 }
-
+*/
 input[type=file] {
 	display: none;
 }
@@ -79,16 +79,16 @@ input[type=file] {
 }
 
 .FirstRow {
-	margin-top: 4%;
+	margin-top: 10%;
 	margin-left: 1%;
 	font-family: "Ariel";
 	font-style: oblique;
 	font-size: 20px;
 }
-
+/*
 .SecondColumn {
 	margin-left: 10%;
-}
+}*/
 
 #list {
 	margin-top: 20%;
@@ -104,7 +104,7 @@ input[type=file] {
 #bodyDim {
 	width: 100%;
 	height: 100%;
-	background-color:rgba(0,0,0,0.3);
+	background-color:rgba(0,0,0,0.2);
 	margin-top: 0%;	
 }
 
