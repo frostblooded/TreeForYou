@@ -14,8 +14,10 @@ input{
 	background-color: #CAFFD8;
 	border-bottom: 1px solid #72FE95;
 	border-radius: 10%;
-	width: 25%;
-	margin-left: 35%;
+	position: absolute;
+	left: 46%;
+	min-width: 72px;
+	width: 8%;
 	opacity: 0.8;
 }
 
@@ -35,7 +37,31 @@ input{
 	margin: 20% auto;
 	padding: 15px;
 	border-radius: 3%;
+	height: 330px;
 	border: 1px solid #EEEEEE;	
+}
+
+#fail, #success, #submit_button {
+	display: inline;
+}
+
+#error_msg {
+	clear: right;
+	float:right;
+	margin-top: 5%;
+	color:red;
+	font-weight: bold;
+}
+
+#success {
+	color: green;
+	font-weight: bold;
+}
+
+#fail {
+	float: right;
+	color: red;
+	font-weight: bold;
 }
 
 body {
