@@ -72,7 +72,7 @@ function setImage(id)
 			}
 			else
 			{
-				$('#image-label')[0].src = "../images/add_picture.png";
+				$('#image-label')[0].src = "images/add_picture.png";
 			}
 			$("#saving").hide();
 	  },
@@ -112,7 +112,7 @@ function placeMarker(pos, map){
 	currentMarker = new google.maps.Marker({
 		position: pos,
 		map: map,
-		icon: "../images/freespot.png"
+		icon: "images/freespot.png"
 	});
 	
 	currentMarker.info = new google.maps.InfoWindow({
@@ -141,10 +141,10 @@ function loadMarkers(){
 
 				if(results[i].get("plantedTree"))
 				{
-					currIcon = "../images/tree_small.png";
+					currIcon = "images/tree_small.png";
 				}
 				else{
-					currIcon = "../images/freespot.png";
+					currIcon = "images/freespot.png";
 				}
 				var marker_pos = results[i].get("coordinates");
 				markers[id ] = new google.maps.Marker({
@@ -197,21 +197,13 @@ function getFileName()
 }
 
 function saveMarker(){
-
-	spaceContent = '<div style = "background-color: color: black">'+
-	'<h3 id = "infoTitle">'+currentTitle+'</h3><div class="clear"></div><p id = "infoDescription"> '+currentDescription+' </p><div class="clear"></div>' +
-
-	'<table style="width:100%"><tr id = "infoTR"><td id = "infoTD"><center></div>' + 
-						'<a id="spot-image-big" href="large_image.jpg" class="fancybox" title="Sample title"><img id="spot-image" src="#" /></a>'+
-						'</center></td>'+
-		'<td id = "infoTD"><center>'+
-						'<span id = "infoAddButton">'+
-							'<span id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
-							'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
-						'</span>'+
-					'</div></center></td></tr>'+
-					'<tr id = "infoTR"><center><td id = "infoTD">'+
-					'<center>'+
+	spaceContent = '<div id = "contentsDiv">' +
+					'<h3 id = "infoTitle">'+currentTitle+'</h3><div class="clear"></div><p id = "infoDescription">'+currentDescription+'</p><div class="clear"></div>' +
+					'<a id="spot-image-big" href="large_image.jpg" class="fancybox" title="Sample title"><img id="spot-image" src="#" /></a>'+
+					'<span id = "infoAddButton">'+
+						'<span id="image-upload"><label for="file-input"><img id="image-label" src="images/add_picture.png"/>'+
+						'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
+					'</span>'+
 					'<span id = "DeleteButton">'+
 							'<button onclick="deleteMarker()">Delete</button>'+
 						'</span>'+
@@ -361,13 +353,17 @@ function editDescription()
 function updateMarker(){
 	if(currentMarker)
 	{
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4abdd7e32af7ca933a55772599457436e80ca2f5
 		var ParseSpace = Parse.Object.extend("Spaces");
 		var query = new Parse.Query(ParseSpace);
 		var id = findId(currentMarker);
 		$("#saving").show();
 		query.get(id, {
 		  success: function(object) {
+				consol.log(object);
 			    var fileUploadControl = $("#file-input")[0];
 
 				var file = fileUploadControl.files[0];
@@ -383,6 +379,11 @@ function updateMarker(){
 					object.set("plantedTree", true);
 					currentMarker.setIcon("../images/tree_small.png");		
 					currentMarker.info.close();
+<<<<<<< HEAD
+=======
+					currentMarker.setIcon("../images/tree_small.png");
+					currentMarker = 0;
+>>>>>>> 718719ba7b858a16fc211b78b791640932cdd51e
 					removeMarker = false;
 					object.save();		
 				}
@@ -401,11 +402,11 @@ function updateMarker(){
 };
 
 addSpaceContent = '<div id = "contentsDiv">' +
-					'<h3 id = "infoTitle">'+currentTitle+'</h3><input class ="editButton"type=image src = "../images/pencil.png" onclick = "editTitle()"><div class="clear"></div>'+
-					'<p id = "infoDescription">'+currentDescription+'</p> <input class ="editButton"type=image src = "../images/pencil.png" onclick = "editDescription()"><div class="clear"></div>' +
+					'<h3 id = "infoTitle">'+currentTitle+'</h3><input class ="editButton"type=image src = "images/pencil.png" onclick = "editTitle()"><div class="clear"></div>'+
+					'<p id = "infoDescription">'+currentDescription+'</p> <input class ="editButton"type=image src = "images/pencil.png" onclick = "editDescription()"><div class="clear"></div>' +
 					'<div id = "spotPicture"></div>'+
 					'<div id = "infoAddButton">'+
-						'<div id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
+						'<div id="image-upload"><label for="file-input"><img id="image-label" src="images/add_picture.png"/>'+
 						'</label><input id="file-input" onchange="readURL(this)" type="file"/></div>'+
 					'</div>'+
 					'<div id = "AcceptButton">'+

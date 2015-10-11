@@ -11,54 +11,6 @@ body {
 	background-size: cover;
 }
 
-
-input[type=submit] {
-	height: 17%;
-	width: 10%;
-	border-radius: 100%;
-	opacity: 0.5;
-	background-color: 99FF00;
-}
-
-/*#upload-button{
-	position: absolute;
-	left: 46%;
-	top: 50%;
-	font-family: "Ariel";
-	font-style: oblique;
-	font-size: 20px;
-
-
-}
-*/
-input[type=file] {
-	display: none;
-}
-
-#user_actions{
-	float: right;
-	width: 16%;
-	height: 10%;
-}
-
-
-
-#reg_div, #login_div {
-	display: block;
-	border: 1px solid black;
-	width: 50%;
-	height: 100%;
-	text-align: center;
-	background-color: #99FF00;
-	opacity: 0.5;
-}
-
-#reg_text, #login_text {
-	position: relative;
-	top: 35%;
-	left: 6%;
-}
-
 #title {
 	padding: 0px;
 	margin: 0px;
@@ -74,47 +26,7 @@ input[type=file] {
 	text-align: center;
 	border-bottom: 1px solid black;
 	background-color: #99FF00;
+	margin-bottom: 0;
 	opacity: 0.5;
-	width: 92%;
-}
-
-.FirstRow {
-	margin-top: 10%;
-	margin-left: 1%;
-	font-family: "Ariel";
-	font-style: oblique;
-	font-size: 20px;
-}
-/*
-.SecondColumn {
-	margin-left: 10%;
-}*/
-
-#list {
-	margin-top: 20%;
-}
-	
-#nav { 
-    text-align: center;
-    clear: left;
-}
-
- /*DIMMING THE BACKGROUND*/
-
-#bodyDim {
 	width: 100%;
-	height: 100%;
-	background-color:rgba(0,0,0,0.2);
-	margin-top: 0%;	
 }
-
-
-/*STYLING OF THE MAP DIV*/
-
-#map {
-	height: 500px;
-	width: 500px;
-    margin: auto auto;
-}
-
-
