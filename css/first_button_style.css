@@ -35,19 +35,25 @@ input[type=file] {
 	display: none;
 }
 
-#reg_div {
+#user_actions{
+	float: right;
+	width: 16%;
+	height: 10%;
+}
+
+
+
+#reg_div, #login_div {
+	display: block;
 	border: 1px solid black;
-	width: 8%;
-	position: absolute;
-	left: 92%;
-	height: 12%;
+	width: 50%;
+	height: 100%;
 	text-align: center;
-	border-bottom-left-radius: 35%;
 	background-color: #99FF00;
 	opacity: 0.5;
 }
 
-#reg_text {
+#reg_text, #login_text {
 	position: relative;
 	top: 35%;
 	left: 6%;
