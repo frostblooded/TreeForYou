@@ -123,6 +123,7 @@ function placeMarker(pos, map){
 		hideInfos();
 		this.info.open(map, this);
 		removeMarker = !findId(currentMarker);
+		currentMarker = this;
 		setImage(findId(this));
 	});
 
@@ -350,7 +351,6 @@ function editDescription()
 }
 
 function updateMarker(){
-
 	if(currentMarker)
 	{
 		var ParseSpace = Parse.Object.extend("Spaces");
@@ -375,8 +375,11 @@ function updateMarker(){
 					object.set("plantedTree", true);
 					currentMarker.setIcon("../images/tree_small.png");		
 					currentMarker.info.close();
+<<<<<<< HEAD
+=======
 					currentMarker.setIcon("../images/tree_small.png");
 					currentMarker = 0;
+>>>>>>> 718719ba7b858a16fc211b78b791640932cdd51e
 					removeMarker = false;
 					object.save();		
 				}
