@@ -21,6 +21,7 @@ body {
 }
 
 #navbar {
+	display: inline-block;
 	height: 10%;
 	float: left;
 	text-align: center;
@@ -28,5 +29,23 @@ body {
 	background-color: #99FF00;
 	margin-bottom: 0;
 	opacity: 0.5;
-	width: 100%;
+	width: 80%;
+}
+
+#reg_div{
+	display: inline-block;
+	background-color: #99FF00;
+	opacity: 0.5;
+	text-emphasis: bold;
+	width: 20%;
+	height: 10%;
+}
+
+a{
+	text-align: center;
+}
+
+#reg_text{
+	display: inline-block;
+	margin: 10% auto;
 }

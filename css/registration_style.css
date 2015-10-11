@@ -5,17 +5,16 @@ input{
     width: 65%;
     font-family: "Times new roman";
 	/*font-style: oblique; */
-	font-size: 20px;
+		font-size: 20px;
 
 }
 
 #submit_button {
-
 	background-color: #CAFFD8;
 	border-bottom: 1px solid #72FE95;
 	border-radius: 10%; 
 	width: 25%;
-	margin-left: 38%;
+	margin: 0 auto;
 	border-radius: 10%;
 	/*left: 46%;*/
 	min-width: 72px;
@@ -43,27 +42,19 @@ input{
 	border: 1px solid #EEEEEE;	
 }
 
-#fail, #success, #submit_button {
-	display: inline;
-}
-
-#error_msg {
-	clear: right;
-	float:right;
-	margin-top: 5%;
-	color:red;
-	font-weight: bold;
-}
-
 #success {
 	color: green;
 	font-weight: bold;
 }
 
-#fail {
-	float: right;
+#error {
 	color: red;
 	font-weight: bold;
+}
+
+#success, #error{
+	display: block;
+	text-align: center;
 }
 
 body {
