@@ -72,7 +72,7 @@ function setImage(id)
 			}
 			else
 			{
-				$('#image-label')[0].src = "../images/add_picture.png";
+				$('#image-label')[0].src = "images/add_picture.png";
 			}
 			$("#saving").hide();
 	  },
@@ -112,7 +112,7 @@ function placeMarker(pos, map){
 	currentMarker = new google.maps.Marker({
 		position: pos,
 		map: map,
-		icon: "../images/freespot.png"
+		icon: "images/freespot.png"
 	});
 	
 	currentMarker.info = new google.maps.InfoWindow({
@@ -139,7 +139,7 @@ function loadMarkers(){
 				var marker_pos = results[i].get("coordinates");
 				markers[id ] = new google.maps.Marker({
 					position: new google.maps.LatLng(marker_pos.latitude, marker_pos.longitude),
-					icon: "../images/freespot.png"
+					icon: "images/freespot.png"
 				});
 				
 				markers[id].info = new google.maps.InfoWindow({
@@ -192,7 +192,7 @@ function saveMarker(){
 					'<h3 id = "infoTitle">'+currentTitle+'</h3><div class="clear"></div><p id = "infoDescription">'+currentDescription+'</p><div class="clear"></div>' +
 					'<a id="spot-image-big" href="large_image.jpg" class="fancybox" title="Sample title"><img id="spot-image" src="#" /></a>'+
 					'<span id = "infoAddButton">'+
-						'<span id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
+						'<span id="image-upload"><label for="file-input"><img id="image-label" src="images/add_picture.png"/>'+
 						'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
 					'</span>'+
 					'<span id = "DeleteButton">'+
@@ -344,7 +344,7 @@ function updateMarker(){
 						'<h3 id = "infoTitle">'+currentTitle+'</h3><div class="clear"></div><p id = "infoDescription">'+currentDescription+'</p><div class="clear"></div>' +
 						'<a id="spot-image-big" href="large_image.jpg" class="fancybox" title="Sample title"><img id="spot-image" src="#" /></a>'+
 						'<span id = "infoAddButton">'+
-							'<span id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
+							'<span id="image-upload"><label for="file-input"><img id="image-label" src="images/add_picture.png"/>'+
 							'</label><input id="file-input" onchange="readURL(this)" type="file"/></span>'+
 						'</span>'+
 						'<span id = "DeleteButton">'+
@@ -393,11 +393,11 @@ function updateMarker(){
 };
 
 addSpaceContent = '<div id = "contentsDiv">' +
-					'<h3 id = "infoTitle">'+currentTitle+'</h3><input class ="editButton"type=image src = "../images/pencil.png" onclick = "editTitle()"><div class="clear"></div>'+
-					'<p id = "infoDescription">'+currentDescription+'</p> <input class ="editButton"type=image src = "../images/pencil.png" onclick = "editDescription()"><div class="clear"></div>' +
+					'<h3 id = "infoTitle">'+currentTitle+'</h3><input class ="editButton"type=image src = "images/pencil.png" onclick = "editTitle()"><div class="clear"></div>'+
+					'<p id = "infoDescription">'+currentDescription+'</p> <input class ="editButton"type=image src = "images/pencil.png" onclick = "editDescription()"><div class="clear"></div>' +
 					'<div id = "spotPicture"></div>'+
 					'<div id = "infoAddButton">'+
-						'<div id="image-upload"><label for="file-input"><img id="image-label" src="../images/add_picture.png"/>'+
+						'<div id="image-upload"><label for="file-input"><img id="image-label" src="images/add_picture.png"/>'+
 						'</label><input id="file-input" onchange="readURL(this)" type="file"/></div>'+
 					'</div>'+
 					'<div id = "AcceptButton">'+

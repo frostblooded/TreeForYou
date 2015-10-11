@@ -13,26 +13,14 @@ input{
 
 	background-color: #CAFFD8;
 	border-bottom: 1px solid #72FE95;
-<<<<<<< HEAD
 	border-radius: 10%; 
 	width: 25%;
 	margin-left: 35%;
 	opacity: 0.9;
-=======
-	border-radius: 10%;
-	position: absolute;
-	left: 46%;
-	min-width: 72px;
-	width: 8%;
-	opacity: 0.8;
->>>>>>> 77b9be81b1256ce3653f29ef97889fc123b5f93b
 }
 
 .form-control{
 	border-radius: 0,5%;
-<<<<<<< HEAD
-	opacity: 0.7;
-=======
 	opacity: 0.5;
 }
 
@@ -72,7 +60,6 @@ input{
 	float: right;
 	color: red;
 	font-weight: bold;
->>>>>>> 77b9be81b1256ce3653f29ef97889fc123b5f93b
 }
 
 body {
